@@ -1,0 +1,1 @@
+var IndexApp = new IndexAppFactory();
