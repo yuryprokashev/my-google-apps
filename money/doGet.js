@@ -5,7 +5,7 @@ function doGet(event) {
     function _renderQUnitTestResults(e){
         QUnit.urlParams(e.parameter);
         QUnit.config({
-            title: "Report Generator. Tests"
+            title: "Money App. Tests"
         });
         QUnit.load(tests);
         return QUnit.getHtml();
