@@ -13,6 +13,7 @@ function IndexAppFactory(){
             if(!_index[key]) _index[key] = [];
             _index[key].push(obj);
             _keys.push(key);
+            return this;
         };
         this.get = function(key){
             if(_index[key]) return _index[key];
@@ -26,6 +27,7 @@ function IndexAppFactory(){
         };
         this.remove = function(key){
             _remove(_index, _keys, key);
+            return this;
         };
     }
 
@@ -35,6 +37,7 @@ function IndexAppFactory(){
         this.set = function (key, obj) {
             _index[key] = obj;
             _keys.push(key);
+            return this;
         };
         this.get = function (key) {
             return _index[key];
@@ -47,6 +50,7 @@ function IndexAppFactory(){
         };
         this.remove = function(key){
             _remove(_index, _keys, key);
+            return this;
         };
     }
 
