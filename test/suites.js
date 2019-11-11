@@ -1,4 +1,4 @@
 function suites() {
     suiteBaseModule();
-    // suiteMappingModule();
+    suiteMappingModule();
 }

@@ -1,19 +1,24 @@
 /**
  * Constructs the collection of TestJiraUser objects
- * @param baseModule
  * @constructor
  */
 function TestJiraUserCollection(baseModule) {
     var users = [
-        new TestJiraUser("yprokashev", "Yury Prokashev", "yury.prokashev@aurea.com"),
-        new TestJiraUser("manimaran.selvan", "Manimaran Selvan", "manimaran.selvan@devfactory.com")
+        new TestJiraUser("yprokashev", "Yury Prokashev", "yury.prokashev@aurea.com", "P2TPM", 39),
+        new TestJiraUser("manimaran.selvan", "Manimaran Selvan", "manimaran.selvan@devfactory.com", "P2TPM", 30)
     ];
     var indexByUsername = baseModule.IndexFactory.getPropertyIndexBuilder()
-        .setIndexedPropertyName("username")
+        .setIndexedPropertyName("name")
         .setStorageIndex(baseModule.IndexFactory.createOneToOneIndex())
         .build();
-    this.prototype = baseModule.CollectionFactory.getBuilder()
+    var jiraUserCollection = baseModule.CollectionFactory.getBuilder()
         .setInstances(users)
         .addPropertyIndex(indexByUsername)
         .build();
+    this.getAll = function () {
+        return jiraUserCollection.getAll();
+    };
+    this.getBy = function (propertyName, propertyValue) {
+        return jiraUserCollection.getBy(propertyName, propertyValue);
+    };
 }
