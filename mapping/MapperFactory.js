@@ -12,7 +12,7 @@ function MapperFactory() {
      * @constructor
      */
     function MapperBuilder() {
-        var _objectMappingRuleCollection;
+        var _objectMappingRuleCollection, _objectMapper;
         this.setObjectMappingRuleCollection = function (collection) {
             _objectMappingRuleCollection = collection;
             return this;

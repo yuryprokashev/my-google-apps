@@ -37,12 +37,12 @@ function ObjectMapperFactory(baseModule) {
          * @return {*}
          */
         this.map = function (objectMappingRule, sourceObject) {
-            baseModule.Validator.isTrue(baseModule.ConditionEvaluator.evaluate(objectMappingRule.getSourceObjectConditionCollection(), sourceObject),
+            baseModule.Validator.mustBeTrue(baseModule.ConditionEvaluator.evaluate(objectMappingRule.getSourceObjectConditionCollection(), sourceObject),
                 "Source Object does not meet conditions defined in the object mapping rule");
             var targetObject = {};
             objectMappingRule.getPropertyMappingRules().forEach(function (propertyMappingRule) {
                 var targetObjectProperty = propertyMapper.map(propertyMappingRule, sourceObject);
-                var targetObjectPropertyKey = propertyMappingRule.getTargetPropertySpec().getByPk("path");
+                var targetObjectPropertyKey = propertyMappingRule.getTargetPropertySpec().getBy("getKey", "path").getValue();
                 Object.defineProperty(targetObject, targetObjectPropertyKey, targetObjectProperty);
             });
             return targetObject;
