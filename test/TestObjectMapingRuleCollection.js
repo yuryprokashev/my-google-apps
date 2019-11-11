@@ -23,11 +23,22 @@ function TestObjectMappingRuleCollection(baseModule, mappingModule, testModule) 
     });
     objectRules.push(objectMappingRuleBuilder.build());
 
+    var indexBySourceType = baseModule.IndexFactory.getPropertyIndexBuilder()
+        .setStorageIndex(baseModule.IndexFactory.createOneToOneIndex())
+        .setIndexedPropertyName("getSourceObjectType")
+        .build();
     var collection = baseModule.CollectionFactory.getBuilder()
         .setInstances(objectRules)
+        .addPropertyIndex(indexBySourceType)
         .build();
 
     this.getAll = function () {
         return collection.getAll();
+    };
+    this.getBySourceObjectType = function (objectType) {
+        return collection.getBy("getSourceObjectType", objectType);
+    };
+    this.getBy = function (propertyKey, propertyValue) {
+        return collection.getBy(propertyKey, propertyValue);
     }
 }

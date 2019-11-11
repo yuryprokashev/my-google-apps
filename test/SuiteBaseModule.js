@@ -36,11 +36,11 @@ function suiteBaseModule() {
             equal(e.message.indexOf("Many") !== -1, true);
         }
     });
-    test("isFalse. Can throw an error, when condition is false", function () {
+    test("mustBeTrue. Can throw an error, when condition is false", function () {
         try{
-            baseModule.Validator.isFalse(false, "Condition is False");
+            baseModule.Validator.mustBeTrue(false, "Condition is False");
         } catch (e) {
-            equal(e.message.indexOf("Condition is False") !== -1, true);
+            equal(e.message.indexOf("Condition is False") !== -1, true, e.message);
         }
     });
     module("Base.IndexFactory");
