@@ -15,7 +15,7 @@ function ValidatorFactory() {
             throw new Error(messageIfMany);
         }
     };
-    this.isFalse = function (condition, messageIfFalse) {
+    this.mustBeTrue = function (condition, messageIfFalse) {
         if(!condition) throw new Error(messageIfFalse);
     };
 }

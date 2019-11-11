@@ -46,7 +46,7 @@ function IndexFactory(baseModule){
             return indexedPropertyName;
         };
         this.index = function (instance) {
-            baseModule.Validator.isFalse(instance.hasOwnProperty(indexedPropertyName),
+            baseModule.Validator.mustBeTrue(instance.hasOwnProperty(indexedPropertyName),
                 "Instance can not be indexed by property: " + indexedPropertyName);
             var indexedPropertyValueExtractor = baseModule.PropertyExtractorCollection.getByType(typeof instance[indexedPropertyName]);
             storageIndex.set(indexedPropertyValueExtractor.extract(indexedPropertyName, instance), instance);
