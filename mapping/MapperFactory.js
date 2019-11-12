@@ -2,7 +2,7 @@
  * Constructs the main mapper interactor.
  * @constructor
  */
-function MapperFactory() {
+function MapperFactory(baseModule) {
     this.getBuilder = function () {
         return new MapperBuilder();
     };
@@ -41,6 +41,7 @@ function MapperFactory() {
          */
         this.map = function (sourceObjectType, sourceObject) {
             var objectMappingRule = objectMappingRuleCollection.getBy("getSourceObjectType", sourceObjectType);
+            baseModule.Validator.isDefined("Object Mapping Rule", objectMappingRule, "For type: " + sourceObjectType);
             return objectMapper.map(objectMappingRule, sourceObject);
         };
     }
