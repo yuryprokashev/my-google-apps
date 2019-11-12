@@ -6,7 +6,7 @@
 function MappingModule(baseModule){
     this.ObjectMappingRuleFactory = new ObjectMappingRuleFactory();
     this.PropertyMappingRuleFactory = new PropertyMappingRuleFactory();
-    this.PropertyMapperFactory = new PropertyMapperFactory(baseModule);
+    this.PropertyMapperFactory = new PropertyMapperFactory(baseModule, this);
     this.ObjectMapperFactory = new ObjectMapperFactory(baseModule);
-    this.MapperFactory = new MapperFactory();
+    this.MapperFactory = new MapperFactory(baseModule);
 }

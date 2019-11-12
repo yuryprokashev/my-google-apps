@@ -1,9 +1,10 @@
 /**
  *
  * @param baseModule {BaseModule}
+ * @param mappingModule {MappingModule}
  * @constructor
  */
-function PropertyMapperFactory(baseModule) {
+function PropertyMapperFactory(baseModule, mappingModule) {
     this.getBuilder = function () {
         return new PropertyMapperBuilder();
     };
@@ -22,6 +23,7 @@ function PropertyMapperFactory(baseModule) {
             return this;
         };
         this.build = function () {
+            baseModule.Validator.isDefined("Object Mapping Rule Collection", _objectMappingRuleCollection);
             return new PropertyMapper(_objectMappingRuleCollection, _propertyConstructors);
         }
     }
@@ -34,7 +36,6 @@ function PropertyMapperFactory(baseModule) {
         this.map = function (propertyMappingRule, sourceObject) {
             var sourcePropertyPathType = propertyMappingRule.getSourcePropertySpec().getBy("getKey", "pathType").getValue();
             var sourcePropertyPath = propertyMappingRule.getSourcePropertySpec().getBy("getKey", "path").getValue();
-            Logger.log("sourcePropertyPathType: %s; sourcePropertyPath: %s", sourcePropertyPathType, sourcePropertyPath);
             var sourceValueExtractor = baseModule.PropertyExtractorCollection.getByType(sourcePropertyPathType);
             var sourceValue = sourceValueExtractor.extract(sourcePropertyPath, sourceObject);
 
@@ -42,11 +43,14 @@ function PropertyMapperFactory(baseModule) {
             var targetValueType = propertyMappingRule.getTargetPropertySpec().getBy("getKey", "type").getValue();
             var targetValueMappingRule = objectMappingRuleCollection.getBy("getSourceObjectType", targetValueType);
             if(targetValueMappingRule) {
-                targetValue = targetValueMappingRule.map(sourceValue);
+                var objectMapper = mappingModule.ObjectMapperFactory.getBuilder()
+                    .setPropertyMapper(this)
+                    .build();
+                targetValue = objectMapper.map(targetValueMappingRule, sourceValue);
             }
-            var targetProperPathType = propertyMappingRule.getTargetPropertySpec().getBy("getKey", "pathType").getValue();
-            var TargetPropertyConstructor = propertyConstructors.get(targetProperPathType);
-            return new TargetPropertyConstructor(targetValue);
+            var targetPropertyPathType = propertyMappingRule.getTargetPropertySpec().getBy("getKey", "pathType").getValue();
+            var TargetPropertyConstructor = propertyConstructors.get(targetPropertyPathType);
+            return new TargetPropertyConstructor(targetValue, false, false, true);
         };
     }
 
@@ -61,7 +65,7 @@ function PropertyMapperFactory(baseModule) {
      */
     function PrimitiveValueProperty(value, isWritable, isConfigurable, isEnumerable){
         this.value = value;
-        this.enumerable = isEnumerable || false;
+        this.enumerable = isEnumerable || true;
         this.configurable = isConfigurable || false;
         this.writable = isWritable || false;
     }
