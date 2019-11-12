@@ -23,8 +23,8 @@ function TestObjectMappingRuleCollection(baseModule, mappingModule, testModule) 
     });
     objectRules.push(objectMappingRuleBuilder.build());
 
-    var indexBySourceType = baseModule.IndexFactory.getPropertyIndexBuilder()
-        .setStorageIndex(baseModule.IndexFactory.createOneToOneIndex())
+    var indexBySourceType = baseModule.IndexFactory.getBuilder()
+        .setStorageMap(baseModule.MapFactory.getBuilder().build())
         .setIndexedPropertyName("getSourceObjectType")
         .build();
     var collection = baseModule.CollectionFactory.getBuilder()

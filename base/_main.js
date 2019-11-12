@@ -5,7 +5,8 @@
 function BaseModule(){
     this.KeyValueFactory = new KeyValueFactory();
     this.Validator = new ValidatorFactory();
-    this.IndexFactory = new IndexFactory(this);
+    this.MapFactory = new KeyMapFactory();
+    this.IndexFactory = new PropertyIndexFactory(this);
     this.CollectionFactory = new CollectionFactory(this);
     this.OperatorCollection = new OperatorCollectionFactory(this);
     this.ConditionFactory = new ConditionFactory();

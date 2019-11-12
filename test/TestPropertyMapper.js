@@ -6,8 +6,8 @@
  * @constructor
  */
 function TestPropertyMapper(baseModule, mappingModule, testModule) {
-    var indexBySourceObjectType = baseModule.IndexFactory.getPropertyIndexBuilder()
-        .setStorageIndex(baseModule.IndexFactory.createOneToOneIndex())
+    var indexBySourceObjectType = baseModule.IndexFactory.getBuilder()
+        .setStorageMap(baseModule.MapFactory.getBuilder().build())
         .setIndexedPropertyName("getSourceObjectType")
         .build();
     var emptyCollection = baseModule.CollectionFactory.getBuilder()

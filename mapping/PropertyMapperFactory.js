@@ -14,7 +14,7 @@ function PropertyMapperFactory(baseModule) {
      */
     function PropertyMapperBuilder() {
         var _objectMappingRuleCollection;
-        var _propertyConstructors = baseModule.IndexFactory.createOneToOneIndex();
+        var _propertyConstructors = baseModule.MapFactory.getBuilder().build();
         _propertyConstructors.set("primitive", PrimitiveValueProperty);
         _propertyConstructors.set("function", FunctionGetterProperty);
         this.setObjectMappingRuleCollection = function (collection) {

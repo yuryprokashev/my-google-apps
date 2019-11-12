@@ -75,9 +75,9 @@ function SpecStringParser(baseModule) {
         argumentStrings.forEach(function (argumentString) {
             argumentKeyValues.push(new ArgumentStringParser(baseModule).parse(argumentString));
         });
-        var indexByKey = baseModule.IndexFactory.getPropertyIndexBuilder()
+        var indexByKey = baseModule.IndexFactory.getBuilder()
             .setIndexedPropertyName("getKey")
-            .setStorageIndex(baseModule.IndexFactory.createOneToOneIndex())
+            .setStorageMap(baseModule.MapFactory.getBuilder().build())
             .build();
         return baseModule.CollectionFactory.getBuilder()
             .addPropertyIndex(indexByKey)

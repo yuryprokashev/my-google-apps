@@ -5,7 +5,7 @@
  */
 function PropertyExtractorCollectionFactory(baseModule) {
     var primitiveTypes = ["boolean", "number", "bigint", "string", "symbol"];
-    var _propertyExtractors = baseModule.IndexFactory.createOneToOneIndex();
+    var _propertyExtractors = baseModule.MapFactory.getBuilder().build();
     _propertyExtractors.set("primitive", PrimitiveExtractor);
     _propertyExtractors.set("function", FunctionExtractor);
 

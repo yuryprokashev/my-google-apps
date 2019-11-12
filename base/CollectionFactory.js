@@ -12,7 +12,7 @@ function CollectionFactory(baseModule){
      * @constructor
      */
     function CollectionBuilder() {
-        var _propertyIndexesMap = baseModule.IndexFactory.createOneToOneIndex();
+        var _propertyIndexesMap = baseModule.MapFactory.getBuilder().build();
         var _instances = [];
         this.addPropertyIndex = function (propertyIndex) {
             _propertyIndexesMap.set(propertyIndex.getIndexedPropertyName(), propertyIndex);
@@ -32,7 +32,7 @@ function CollectionFactory(baseModule){
      * @constructor
      */
     function Collection(propertyIndexesMap, instances) {
-        var _indexByPosition = baseModule.IndexFactory.createOneToOneIndex();
+        var _indexByPosition = baseModule.MapFactory.getBuilder().build();
         instances.forEach(function (instance) {
             _indexOne(instance);
         });

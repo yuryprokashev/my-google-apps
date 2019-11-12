@@ -7,9 +7,9 @@ function TestJiraUserCollection(baseModule) {
         new TestJiraUser("yprokashev", "Yury Prokashev", "yury.prokashev@aurea.com", "P2TPM", 39),
         new TestJiraUser("manimaran.selvan", "Manimaran Selvan", "manimaran.selvan@devfactory.com", "P2TPM", 30)
     ];
-    var indexByUsername = baseModule.IndexFactory.getPropertyIndexBuilder()
+    var indexByUsername = baseModule.IndexFactory.getBuilder()
         .setIndexedPropertyName("name")
-        .setStorageIndex(baseModule.IndexFactory.createOneToOneIndex())
+        .setStorageMap(baseModule.MapFactory.getBuilder().build())
         .build();
     var jiraUserCollection = baseModule.CollectionFactory.getBuilder()
         .setInstances(users)

@@ -3,7 +3,7 @@
  * @constructor
  */
 function OperatorCollectionFactory(baseModule) {
-    var _operatorMap = baseModule.IndexFactory.createOneToOneIndex();
+    var _operatorMap = baseModule.MapFactory.getBuilder().build();
     _operatorMap.set("eq", eq);
     _operatorMap.set("gte", gte);
     _operatorMap.set("gt", gt);

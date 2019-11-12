@@ -43,9 +43,9 @@ function suiteBaseModule() {
             equal(e.message.indexOf("Condition is False") !== -1, true, e.message);
         }
     });
-    module("Base.IndexFactory");
+    module("Base.MapFactory");
     test("Can create 1-to-1 Index", function () {
-        var index = baseModule.IndexFactory.createOneToOneIndex();
+        var index = baseModule.MapFactory.getBuilder().build();
         index.set("yprokashev", new TestJiraUser("yprokashev", "Yury Prokashev", "yury.prokashev@aurea.com"));
         equal(index.has("yprokashev"), true);
         equal(index.get("yprokashev").displayName, "Yury Prokashev");
@@ -53,10 +53,11 @@ function suiteBaseModule() {
         equal(index.has("yprokashev"), false);
         equal(index.get("yprokashev"), undefined);
     });
+    module("Base.PropertyIndexFactory");
     test("Can create PropertyIndex", function () {
-        var indexByUsername = baseModule.IndexFactory.getPropertyIndexBuilder()
+        var indexByUsername = baseModule.IndexFactory.getBuilder()
             .setIndexedPropertyName("name")
-            .setStorageIndex(baseModule.IndexFactory.createOneToOneIndex())
+            .setStorageMap(baseModule.MapFactory.getBuilder().build())
             .build();
         var yprokashev = new TestJiraUser("yprokashev", "Yury Prokashev", "yury.prokashev@aurea.com");
         indexByUsername.index(yprokashev);
@@ -64,7 +65,7 @@ function suiteBaseModule() {
         equal(indexByUsername.getIndexedPropertyName(), "name");
     });
     test("Can create 1-to-N Index", function () {
-        var indexByRole = baseModule.IndexFactory.createOneToManyIndex();
+        var indexByRole = baseModule.MapFactory.getBuilder().setOneToMany(true).build();
         var yprokashev = new TestJiraUser("yprokashev", "Yury Prokashev", "yury.prokashev@aurea.com", "P2TPM");
         var mani = new TestJiraUser("mani", "Manimaran Selvan", "mani@devfactory.com", "P2TPM");
         indexByRole.set(yprokashev.role, yprokashev);
@@ -93,8 +94,8 @@ function suiteBaseModule() {
         })
     });
     test("Can insert instance to Collection", function () {
-        var indexByEmail = baseModule.IndexFactory.getPropertyIndexBuilder()
-            .setStorageIndex(baseModule.IndexFactory.createOneToOneIndex())
+        var indexByEmail = baseModule.IndexFactory.getBuilder()
+            .setStorageMap(baseModule.MapFactory.getBuilder().build())
             .setIndexedPropertyName("emailAddress")
             .build();
         var collection = baseModule.CollectionFactory.getBuilder()
