@@ -15,13 +15,26 @@ function TestObjectMappingRuleCollection(baseModule, mappingModule, testModule) 
         .setInstances(userConditions)
         .build();
     var objectRules = [];
-    var objectMappingRuleBuilder = mappingModule.ObjectMappingRuleFactory.getBuilder()
+    var jiraUserMappingRuleBuilder = mappingModule.ObjectMappingRuleFactory.getBuilder()
         .setSourceObjectType("JiraUser")
         .setSourceObjectConditionCollection(userConditionCollection);
-    testModule.propertyMappingRulesCollection.getAll().forEach(function (propertyMappingRule) {
-        objectMappingRuleBuilder.addPropertyMappingRule(propertyMappingRule);
-    });
-    objectRules.push(objectMappingRuleBuilder.build());
+    testModule.propertyMappingRulesCollection.getBy("getSourceObjectType", "JiraUser")
+        .forEach(function (propertyMappingRule) {
+            jiraUserMappingRuleBuilder.addPropertyMappingRule(propertyMappingRule);
+        });
+    objectRules.push(jiraUserMappingRuleBuilder.build());
+
+    var issueConditionCollection = baseModule.CollectionFactory.getBuilder()
+        .setInstances([])
+        .build();
+    var jiraIssueMappingRuleBuilder = mappingModule.ObjectMappingRuleFactory.getBuilder()
+        .setSourceObjectType("JiraIssue")
+        .setSourceObjectConditionCollection(issueConditionCollection);
+    testModule.propertyMappingRulesCollection.getBy("getSourceObjectType", "JiraIssue")
+        .forEach(function(propertyMappingRule){
+            jiraIssueMappingRuleBuilder.addPropertyMappingRule(propertyMappingRule);
+        });
+    objectRules.push(jiraIssueMappingRuleBuilder.build());
 
     var indexBySourceType = baseModule.IndexFactory.getBuilder()
         .setStorageMap(baseModule.MapFactory.getBuilder().build())

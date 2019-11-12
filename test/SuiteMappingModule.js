@@ -15,7 +15,7 @@ function suiteMappingModule(){
     });
     module("Mapping.PropertyMappingRuleFactory");
     test("Can create PropertyMappingRule", function () {
-        testModule.propertyMappingRulesCollection.getAll().forEach(function (propertyMappingRule) {
+        testModule.propertyMappingRulesCollection.getBy("getSourceObjectType", "JiraUser").forEach(function (propertyMappingRule) {
             equal(propertyMappingRule.getSourceObjectType(), "JiraUser");
             propertyMappingRule.getSourcePropertySpec().getAll().forEach(function(keyValue){
                 equal(true, true, keyValue.getKey() + ":" + keyValue.getValue())
@@ -28,7 +28,7 @@ function suiteMappingModule(){
     module("Mapping.PropertyMapperFactory");
     test("Can map property", function () {
         var sourceObject = testModule.jiraUserCollection.getBy("name", "yprokashev");
-        testModule.propertyMappingRulesCollection.getAll().forEach(function(propertyMappingRule){
+        testModule.propertyMappingRulesCollection.getBy("getSourceObjectType", "JiraUser").forEach(function(propertyMappingRule){
             var newProperty = testModule.propertyMapper.map(propertyMappingRule, sourceObject);
             equal(true, true, newProperty.value());
         });
@@ -44,7 +44,6 @@ function suiteMappingModule(){
         })
     });
     test("Can create object from other object using ObjectMappingRule", function () {
-
         var objectMappingRule = testModule.objectMappingRuleCollection.getBySourceObjectType("JiraUser");
         var sourceObject = testModule.jiraUserCollection.getBy("name", "yprokashev");
         var targetObject = testModule.objectMapper.map(objectMappingRule, sourceObject);
@@ -53,7 +52,7 @@ function suiteMappingModule(){
         equal(targetObject.getAge(), 39, targetObject.getAge());
         equal(targetObject.getDisplayName(), "Yury Prokashev", targetObject.getDisplayName());
     });
-    test("Can map object from other object using the source type and object", function () {
+    test("Can create a new plain object from other plain object using the source type and object", function () {
         var sourceObject = testModule.jiraUserCollection.getBy("name", "yprokashev");
         var targetObject = testModule.mapper.map("JiraUser", sourceObject);
         equal(targetObject.getName(), "yprokashev", targetObject.getName());
@@ -61,6 +60,18 @@ function suiteMappingModule(){
         equal(targetObject.getAge(), 39, targetObject.getAge());
         equal(targetObject.getDisplayName(), "Yury Prokashev", targetObject.getDisplayName());
     });
+    test("Can create object from object with child object", function () {
+        var sourceObject = testModule.jiraIssueCollection.getBy("key", "CENPRO-1");
+        var targetObject = testModule.mapper.map("JiraIssue", sourceObject);
+        equal(targetObject.getKey(), "CENPRO-1", targetObject.getKey());
+        equal(targetObject.getStatus(), "Backlog", targetObject.getStatus());
+        Logger.log("TARGET OBJECT KEYS %s", Object.keys(targetObject));
+        Logger.log("TARGET OBJECT PROPERTY NAMES %s", Object.getOwnPropertyNames(targetObject));
+        equal(targetObject.getAssignee().getName(), "yprokashev", targetObject.getAssignee().getName());
+        equal(targetObject.getAssignee().getRole(), "P2TPM", targetObject.getAssignee().getRole());
+        equal(targetObject.getAssignee().getAge(), 39, targetObject.getAssignee().getAge());
+        equal(targetObject.getAssignee().getDisplayName(), "Yury Prokashev", targetObject.getAssignee().getDisplayName());
+    })
 }
 
 /**
