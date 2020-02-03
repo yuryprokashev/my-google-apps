@@ -5,6 +5,10 @@
       "userSymbol": "QUnit",
       "libraryId": "13agWuzcPH32W4JJvOqOEYqeNHGihS63P2V-a-Vxz-c9WPIzZYBvIhs3m",
       "version": "4"
+    }, {
+      "userSymbol": "Base",
+      "libraryId": "160qGCi_3iFNlDtNIUtBpashJLZdKcoFb2bji7EJ0YltL-gYQfh5WKUn7",
+      "version": ""
     }]
   },
   "webapp": {
