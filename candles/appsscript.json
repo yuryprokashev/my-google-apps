@@ -1,0 +1,15 @@
+{
+  "timeZone": "America/New_York",
+  "dependencies": {
+    "libraries": [{
+      "userSymbol": "HttpModule",
+      "libraryId": "1e-uMQoWYEyMq_41BPt_4V0nAEKF0hHJDkcHQD0LPdzeQsdXjAracS3i0",
+      "version": ""
+    },{
+      "userSymbol": "BaseModule",
+      "libraryId": "1Aj9moou4JW281Rx-p8-zdYDEdYH5J091xH7_PeFcwKK8ClZuFJyL29Xd",
+      "version": ""
+    }]
+  },
+  "exceptionLogging": "STACKDRIVER"
+}
