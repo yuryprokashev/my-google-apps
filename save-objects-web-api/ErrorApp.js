@@ -14,15 +14,17 @@ function ErrorAppConstructor(BaseModule) {
         _errorTable.save(errorRows);
     };
    function _init() {
-       _errorTable = BaseModule.TableBuilderFactory.getBuilder()
-           .setSpreadsheetUrl(errorTableUrl)
-           .setSheetName(errorSheetName)
-           .build();
        _errorToRowMap = BaseModule.KeyMapBuilderFactory.getBuilder().build();
        _errorToRowMap.set("timestamp", 0);
        _errorToRowMap.set("event", 1);
        _errorToRowMap.set("message", 2);
        _errorToRowMap.set("stack", 3);
+       _errorToRowMap.set("sender", 4);
+       _errorTable = BaseModule.TableBuilderFactory.getBuilder()
+           .setSpreadsheetUrl(errorTableUrl)
+           .setSheetName(errorSheetName)
+           .setNumberOfColumns(_errorToRowMap.keys().length)
+           .build();
        _rowFactory = BaseModule.ObjectToRowFactoryBuilderFactory.getBuilder().setObjectToRowMap(_errorToRowMap).build();
    }
 }
