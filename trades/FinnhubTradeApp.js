@@ -17,6 +17,7 @@ function FinnhubTradeAppConstructor(BaseModule, FinnhubTradesModule){
         _tradesTable = BaseModule.TableBuilderFactory.getBuilder()
             .setSpreadsheetUrl(tradesSpreadsheetUrl)
             .setSheetName(tradesTabName)
+            .setNumberOfColumns(4)
             .build();
     }
 }
