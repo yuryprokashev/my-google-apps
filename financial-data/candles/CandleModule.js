@@ -2,7 +2,7 @@
  *
  * @constructor
  */
-function CandleModuleConstructor() {
+function CandlesConstructor() {
     var baseModule = new BaseModule.BaseModuleConstructor();
     var httpModule = new HttpModule.HttpModuleConstructor();
     const candlesSpreadsheetUrl = "https://docs.google.com/spreadsheets/d/1oQO_oN_C2KvrwqnzGvvRxAWoYx41I1fGR-0KttO1iLw/edit";
@@ -10,13 +10,13 @@ function CandleModuleConstructor() {
     this.CandleApp = baseModule.ObjectAppBuilderFactory.getBuilder()
         .setSpreadsheetUrl(candlesSpreadsheetUrl)
         .setSheetName("Candles")
-        .addOnjectToRowMapping("getTimestamp", 0)
-        .addOnjectToRowMapping("getSymbol", 1)
-        .addOnjectToRowMapping("getOpenPrice", 2)
-        .addOnjectToRowMapping("getHighestPrice", 3)
-        .addOnjectToRowMapping("getLowestPrice", 4)
-        .addOnjectToRowMapping("getClosePrice", 5)
-        .addOnjectToRowMapping("getVolume", 6)
+        .addObjectToRowMapping("getTimestamp", 0)
+        .addObjectToRowMapping("getSymbol", 1)
+        .addObjectToRowMapping("getOpenPrice", 2)
+        .addObjectToRowMapping("getHighestPrice", 3)
+        .addObjectToRowMapping("getLowestPrice", 4)
+        .addObjectToRowMapping("getClosePrice", 5)
+        .addObjectToRowMapping("getVolume", 6)
         .build();
     this.CandleSynchronizer = new CandleSynchronizerConstructor(baseModule, httpModule, this);
 }
