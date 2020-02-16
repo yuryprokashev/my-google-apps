@@ -1,0 +1,27 @@
+{
+  "timeZone": "Europe/Moscow",
+  "dependencies": {
+    "libraries": [{
+      "userSymbol": "Trades",
+      "libraryId": "1TKosIwxAbubqD5nhscKYYYQmcDAj7LB3zFWRn3ATattFNRyGE5L4BPmD",
+      "version": ""
+    }, {
+      "userSymbol": "Candles",
+      "libraryId": "1Ta17-0gebeiC2vWtaDBFblWpJx9XSv6C3SkAOTPB9rcqDOZWmbJ3tflq",
+      "version": ""
+    }, {
+      "userSymbol": "BaseModule",
+      "libraryId": "1Aj9moou4JW281Rx-p8-zdYDEdYH5J091xH7_PeFcwKK8ClZuFJyL29Xd",
+      "version": ""
+    }, {
+        "userSymbol": "Errors",
+        "libraryId": "1BF9xaJ4IqOiDGjkbSp01hY2kLM-ZX1oWm2x1azBEF-VKw91jvEQY8KRR",
+      "version": ""
+      }]
+  },
+  "webapp": {
+    "access": "ANYONE_ANONYMOUS",
+    "executeAs": "USER_DEPLOYING"
+  },
+  "exceptionLogging": "STACKDRIVER"
+}

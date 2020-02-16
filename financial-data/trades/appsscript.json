@@ -1,0 +1,12 @@
+{
+  "timeZone": "America/New_York",
+  "dependencies": {
+    "libraries": [{
+      "userSymbol": "BaseModule",
+      "libraryId": "1Aj9moou4JW281Rx-p8-zdYDEdYH5J091xH7_PeFcwKK8ClZuFJyL29Xd",
+      "version": ""
+    }]
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8"
+}

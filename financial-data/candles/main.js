@@ -1,5 +1,5 @@
 Logger = console;
 function onTimeTrigger(){
-    var candleModule = new CandleModuleConstructor();
+    var candleModule = new CandlesConstructor();
     candleModule.CandleSynchronizer.execute();
 }
