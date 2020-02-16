@@ -11,8 +11,14 @@ function ObjectAppRepositoryConstructor(){
     function _init(){
         var baseModule = new BaseModule.BaseModuleConstructor();
         _objectAppByTypeMap = baseModule.KeyMapBuilderFactory.getBuilder().build();
-        _objectAppByTypeMap.set("FinnhubTrade", new Trades.TradesConstructor().FinnhubTradeApp);
-        _objectAppByTypeMap.set("Candle", new Candles.CandlesConstructor().CandleApp);
-        _objectAppByTypeMap.set("Error", new Errors.ErrorsConstructor().ErrorApp);
+        var tradeApp = new Trades.TradesConstructor().FinnhubTradeApp;
+        var candleApp = new Candles.CandlesConstructor().CandleApp;
+        var errorApp = new Errors.ErrorsConstructor().ErrorApp;
+        baseModule.Validator.isDefined("TradeApp", tradeApp);
+        baseModule.Validator.isDefined("CandleApp", candleApp);
+        baseModule.Validator.isDefined("ErrorApp", errorApp);
+        _objectAppByTypeMap.set("FinnhubTrade", tradeApp);
+        _objectAppByTypeMap.set("Candle", candleApp);
+        _objectAppByTypeMap.set("Error", errorApp);
     }
 }
